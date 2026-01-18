@@ -1,0 +1,23 @@
+
+#root{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    display: inline-block;
+}
+
+#header-h1{
+    color: blue;
+    text-align: center;
+}
+
+.paragraph-p1{
+        text-align: center;
+        font-weight: 700;
+}
+
+.logo{
+    width: 30%;
+}
