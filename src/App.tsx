@@ -1,51 +1,19 @@
-import HeaderH1 from "../src/components/page/header";
-import Paragraph from "./components/page/paragraph";
-import Footer from "./components/page/footer";
-import Section from "./components/page/section";
-import './components/page/style.css';
-import { initialEmployees } from "./data/data";
-import EmployeeForm from "./components/page/employeeForm";
-import { useState } from "react";
-
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Employees from "../src/components/page/employees";
+import Organization from "../src/components/page/organization";
+import { Layout } from "./components/page/layout";
 
 function App() {
-  // This is my state where I am using flatMap to convert my data into list.
-const [employees, setEmployees] = useState(initialEmployees.flatMap(dept =>
-    dept.employees.map(emp => ({
-      firstName: emp.firstName,
-      department: dept.name
-    }))
-  )
-);
-
-
-const addEmployee = (employee: any) => {
-  setEmployees([...employees, employee]);
-};
-
-
   return (
-    <>
-    <HeaderH1 />
-    <Paragraph />
-    <Section />
-{["Health Care", "Technology", "Finance"].map((dept) => (
-  <div key={dept}>
-    <h2>{dept}</h2>
-    <ul>
-      {employees
-        .filter(emp => emp.department === dept && emp.firstName)
-        .map(emp => (
-          <li key={emp.firstName}>{emp.firstName}</li>
-        ))}
-      </ul>
-  </div>
-))}
-
-    <EmployeeForm addEmployee={addEmployee} />
-
-    <Footer />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<Navigate to="/employees" />} />
+          <Route path="/employees" element={<Employees />} />
+          <Route path="/organization" element={<Organization />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
