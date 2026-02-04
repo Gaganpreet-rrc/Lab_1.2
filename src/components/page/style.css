@@ -1,4 +1,3 @@
-
 #root{
     margin: 0;
     padding: 0;
@@ -20,4 +19,13 @@ body{
 
 .logo{
     width: 30%;
+}
+
+button{
+    color: black;
+    background-color: blue;
+    
+}
+.error{
+    color: red;
 }

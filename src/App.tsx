@@ -3,48 +3,39 @@ import Paragraph from "./components/page/paragraph";
 import Footer from "./components/page/footer";
 import Section from "./components/page/section";
 import './components/page/style.css';
-import { initialEmployees } from "./data/data";
 import EmployeeForm from "./components/page/employeeForm";
 import { useState } from "react";
-
+import { employeeRepo } from "./repositories/employeeRepo";
 
 function App() {
-  // This is my state where I am using flatMap to convert my data into list.
-const [employees, setEmployees] = useState(initialEmployees.flatMap(dept =>
-    dept.employees.map(emp => ({
-      firstName: emp.firstName,
-      department: dept.name
-    }))
-  )
-);
+const [departments, setDepartments] = useState(
+    employeeRepo.getDepartments()
+  );
 
-
-const addEmployee = (employee: any) => {
-  setEmployees([...employees, employee]);
-};
-
+  const refreshDepartments = () => {
+    setDepartments([...employeeRepo.getDepartments()]);
+  };
 
   return (
     <>
-    <HeaderH1 />
-    <Paragraph />
-    <Section />
-{["Health Care", "Technology", "Finance"].map((dept) => (
-  <div key={dept}>
-    <h2>{dept}</h2>
-    <ul>
-      {employees
-        .filter(emp => emp.department === dept && emp.firstName)
-        .map(emp => (
-          <li key={emp.firstName}>{emp.firstName}</li>
-        ))}
-      </ul>
-  </div>
-))}
+      <HeaderH1 />
+      <Paragraph />
+      <Section />
 
-    <EmployeeForm addEmployee={addEmployee} />
+      {departments.map(dept => (
+        <div key={dept.id}>
+          <h2>{dept.name}</h2>
+          <ul>
+            {dept.employees.map(emp => (
+              <li key={emp.id}>{emp.firstName}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
 
-    <Footer />
+      <EmployeeForm onEmployeeAdded={refreshDepartments} />
+
+      <Footer />
     </>
   );
 }
