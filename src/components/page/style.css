@@ -28,3 +28,9 @@ nav{
 .navbar{
     color: rgb(10, 12, 112);
 }
+
+.error {
+  color: red;
+  font-size: 0.9rem;
+  margin: 4px 0;
+}
