@@ -28,11 +28,15 @@ nav{
 .navbar{
     color: rgb(10, 12, 112);
 }
+
 button{
     color: black;
     background-color: blue;
     
 }
-.error{
-    color: red;
+
+.error {
+  color: red;
+  font-size: 0.9rem;
+  margin: 4px 0;
 }
