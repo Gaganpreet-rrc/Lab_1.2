@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { organizationRepo } from "../../repositories/organizationRepo";
-import AddPersonForm from "../page/addPersonForm";
+import AddPersonForm from "./addPersonForm";
 
 export default function OrganizationPage() {
   const [people, setPeople] = useState<any[]>([]);

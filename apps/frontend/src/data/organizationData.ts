@@ -1,4 +1,4 @@
-import type { Role } from "../../src/interface/Role";
+import type { Role } from "../interface/Role";
 
 export const organizationData: Role[] = [
   { id: 1, firstName: "Jo-Anne", lastName: "Sinclair", role: "CEO/Chair of Board" },

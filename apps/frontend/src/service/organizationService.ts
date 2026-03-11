@@ -1,6 +1,5 @@
 import { organizationRepo } from "../repositories/organizationRepo";
 
-
 export const organizationService = {
   validate(firstName: string, lastName: string, role: string) {
     const errors: { [key: string]: string } = {};
