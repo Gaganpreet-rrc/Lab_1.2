@@ -1,53 +1,44 @@
-import { useState } from "react";
+import { useFormInput } from "../../hooks/useFormInput";
+import { employeeService } from "../../services/employeeService";
 
-function EmployeeForm({ addEmployee }: any) {
-  const [firstName, setFirstName] = useState("");
-  const [department, setDepartment] = useState("");
-  const [error, setError] = useState("");
+function EmployeeForm({ onEmployeeAdded }: { onEmployeeAdded: () => void }) {
+  const firstName = useFormInput("");
+  const departmentId = useFormInput("");
 
-  const submission = (e: any) => {
+  const submission = (e: React.FormEvent) => {
     e.preventDefault();
-    setError("");
 
-    if (firstName.length < 3) {
-      setError("First name must be at least 3 characters");
+    const valid = firstName.validate(value =>
+      value.length < 3 ? "First name must be at least 3 characters" : null
+    );
+
+    if (!valid) return;
+
+    const result = employeeService.createEmployee(
+      firstName.value,
+      Number(departmentId.value)
+    );
+
+    if (!result.success) {
+      firstName.validate(() => result.message);
       return;
     }
 
-    if (!department) {
-      setError("Please select a department");
-      return;
-    }
-
-    addEmployee({ firstName, department });
-
-    setFirstName("");
-    setDepartment("");
+    onEmployeeAdded();
+    firstName.setValue("");
+    departmentId.setValue("");
   };
 
   return (
     <form onSubmit={submission}>
-      <label>First Name:</label>
-      <input
-        type="text"
-        value={firstName}
-        onChange={(e) => setFirstName(e.target.value)}
-      />
+      <label>Full Name</label>
+      <input value={firstName.value} onChange={firstName.onChange} />
+      <p className="error">{firstName.message}</p>
 
-      <label>    Department:</label>
-      <select
-        value={department}
-        onChange={(e) => setDepartment(e.target.value)}
-      >
-        <option value="">Select Department</option>
-        <option value="Health Care">Health Care</option>
-        <option value="Technology">Technology</option>
-        <option value="Finance">Finance</option>
-      </select>
+      <label>Department ID</label>
+      <input value={departmentId.value} onChange={departmentId.onChange} />
 
       <button type="submit">Add Employee</button>
-
-      {error && <p style={{ color: "red" }}>{error}</p>}
     </form>
   );
 }

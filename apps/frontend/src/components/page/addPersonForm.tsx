@@ -1,4 +1,4 @@
-import { useAddPerson } from "../../hook/useAddPerson";
+import { useAddPerson } from "../../hooks/useAddPerson";
 
 export default function AddPersonForm({ refresh }: any) {
   const { values, errors, handleChange, handleSubmit } = useAddPerson(refresh);
