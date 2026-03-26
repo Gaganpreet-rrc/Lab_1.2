@@ -1,8 +1,13 @@
 import { rolesSeedData, employeesSeedData } from "./seedData.js";
 import "dotenv/config";
-import { PrismaClient } from "../generated/prisma/index.js";
+import { PrismaClient } from "../generated/prisma";
+import { PrismaPg } from "@prisma/adapter-pg";
 
-const prisma = new PrismaClient();
+const adapter = new PrismaPg({
+  connectionString: process.env.DATABASE_URL!,
+});
+
+const prisma = new PrismaClient({ adapter });
 
 async function main() {
   await prisma.employee.deleteMany();

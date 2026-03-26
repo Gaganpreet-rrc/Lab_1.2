@@ -3,4 +3,3 @@
 /* eslint-disable */
 // biome-ignore-all lint: generated file
 module.exports = { ...require('.') }
-
