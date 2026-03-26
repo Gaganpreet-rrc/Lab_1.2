@@ -8,31 +8,33 @@ function Employees() {
     fetch("http://localhost:3000/employees")
       .then(res => res.json())
       .then(data => {
-        const formatted = data.flatMap((dept: any) =>
-          dept.employees.map((emp: any) => ({
-            firstName: emp.firstName,
-            department: dept.name
-          }))
-        );
+        console.log(data); 
+        const formatted = data.map((emp: any) => ({
+          firstName: emp.name,
+          department: emp.role?.name || "Unknown",
+        }));
         setEmployees(formatted);
-      });
+      })
+      .catch(err => console.error("Failed to fetch employees:", err));
   }, []);
 
   const addEmployee = (employee: any) => {
     setEmployees([...employees, employee]);
   };
 
+const departments = [...new Set(employees.map(emp => emp.department))];
+
   return (
     <div>
       <h2>Employees</h2>
-      {["Health Care", "Technology", "Finance"].map((dept) => (
+      {departments.map((dept) => (
         <div key={dept}>
           <h3>{dept}</h3>
           <ul>
             {employees
-              .filter(emp => emp.department === dept && emp.firstName)
-              .map(emp => (
-                <li key={emp.firstName}>{emp.firstName}</li>
+              .filter(emp => emp.department === dept)
+              .map((emp, index) => (
+                <li key={index}>{emp.firstName}</li>
               ))}
           </ul>
         </div>

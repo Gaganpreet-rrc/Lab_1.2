@@ -14,8 +14,8 @@ function Organization() {
       <h2>Organization</h2>
       {organization.map((person) => (
         <div key={person.id} style={{ display: "flex", gap: "40px" }}>
-          <span>{person.firstName} {person.lastName}</span>
-          <span>{person.role}</span>
+          <span>{person.name}</span>
+          <span>{person.role?.name}</span>
         </div>
       ))}
     </div>
