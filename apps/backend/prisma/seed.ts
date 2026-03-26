@@ -1,4 +1,4 @@
-import { rolesSeedData, employeesSeedData } from "./seedData.js";
+import { rolesSeedData, employeesSeedData } from "./seedData";
 import "dotenv/config";
 import { PrismaClient } from "../generated/prisma";
 import { PrismaPg } from "@prisma/adapter-pg";
