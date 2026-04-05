@@ -40,9 +40,8 @@ function EmployeeForm({ addEmployee }: any) {
         onChange={(e) => setDepartment(e.target.value)}
       >
         <option value="">Select Department</option>
-        <option value="Health Care">Health Care</option>
-        <option value="Technology">Technology</option>
-        <option value="Finance">Finance</option>
+        <option value="Admin">Admin</option>
+        <option value="User">User</option>
       </select>
 
       <button type="submit">Add Employee</button>
