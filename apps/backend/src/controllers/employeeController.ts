@@ -37,7 +37,10 @@ export const createEmployee = async (req: Request, res: Response) => {
         email,
         roleId: Number(roleId),
       },
-    });
+    include: {
+    role: true,
+  },
+});
 
     res.status(201).json(newEmployee);
   } catch (error) {
