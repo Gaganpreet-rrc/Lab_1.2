@@ -83,7 +83,7 @@ const addEmployee = async (employee: any) => {
       ) : (
         <div>
           <p>Please log in to add employees</p>
-          <SignInButton />
+          <SignInButton mode="redirect" forceRedirectUrl="/sign-in" />
         </div>
       )}
       <div style={{ marginTop: "20px" }}>
