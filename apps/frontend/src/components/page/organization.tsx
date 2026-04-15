@@ -2,12 +2,13 @@ import { useState, useEffect } from "react";
 
 function Organization() {
   const [organization, setOrganization] = useState<any[]>([]);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
-    fetch("http://localhost:3000/organization")
+    fetch(`http://localhost:3000/organization?page=${page}&limit=5`)
       .then(res => res.json())
       .then(data => setOrganization(data));
-  }, []);
+  }, [page]);
 
   return (
     <div>
@@ -18,6 +19,19 @@ function Organization() {
           <span>{person.role?.name}</span>
         </div>
       ))}
+
+      <div style={{ marginTop: "20px" }}>
+        <button onClick={() => setPage(page - 1)} disabled={page === 1}>
+          Previous
+        </button>
+
+        <span style={{ margin: "0 10px" }}>Page {page}</span>
+
+        <button onClick={() => setPage(page + 1)}
+          >
+          Next
+        </button>
+      </div>
     </div>
   );
 }

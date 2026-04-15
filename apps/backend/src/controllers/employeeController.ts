@@ -16,9 +16,15 @@ const prisma = new PrismaClient({
 // My getEmployees 
 export const getEmployees = async (req: Request, res: Response) => {
   try {
+ const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 5;
+    const skip = (page - 1) * limit;
     const employees = await prisma.employee.findMany({
+      skip: skip,
+      take: limit,
       include: { role: true },
     });
+
     res.json(employees);
   } catch (error) {
     console.error(error);

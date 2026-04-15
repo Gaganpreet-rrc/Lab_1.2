@@ -2,13 +2,15 @@ import { useState, useEffect } from "react";
 import EmployeeForm from "./employeeForm";
 import { useUser, SignInButton, useAuth } from "@clerk/clerk-react";
 
+
 function Employees() {
   const [employees, setEmployees] = useState<any[]>([]);
+  const [page, setPage] = useState(1);
   const { isSignedIn } = useUser();
   const { getToken } = useAuth();
 
   useEffect(() => {
-    fetch("http://localhost:3000/employees")
+    fetch(`http://localhost:3000/employees?page=${page}&limit=5`)
       .then(res => res.json())
       .then(data => {
         console.log(data); 
@@ -19,7 +21,7 @@ function Employees() {
         setEmployees(formatted);
       })
       .catch(err => console.error("Failed to fetch employees:", err));
-  }, []);
+  }, [page]);
 
 const addEmployee = async (employee: any) => {
     try {
@@ -84,6 +86,18 @@ const addEmployee = async (employee: any) => {
           <SignInButton />
         </div>
       )}
+      <div style={{ marginTop: "20px" }}>
+        <button onClick={() => setPage(page - 1)} disabled={page === 1}>
+        Previous
+      </button>
+
+      <span style={{ margin: "0 10px" }}>Page {page}</span>
+
+      <button onClick={() => setPage(page + 1)}>
+        Next
+      </button>
+    </div>
+      
     </div>
   );
 }
