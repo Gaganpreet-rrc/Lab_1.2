@@ -1,76 +1,13 @@
-# Lab_1.2
-Lab_1.2
-# React + TypeScript + Vite
+# Pagination Feature (Lab 5.2)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## What change I made in my application
+- In this lab, I added pagination feature to my application so that employees are not loaded all at once. Before this change, all employee data was displayed together, which could slow down the app if there is a lot of data. Now, I limited the data to only 5 employees per page and added Next and Previous buttons to move between pages easily.
 
-Currently, two official plugins are available:
+## What tool or tools you've made use of to make this change
+- To implement this change, I used Express and Prisma in the backend and React in the frontend. In the backend, I used Prisma’s skip and take features to control how many records are returned. In the frontend, I used React hooks like useState and useEffect to manage the page number and fetch data dynamically when the page changes.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## How this change affects the user experience
+- This change improves the user experience by making the application faster and more organized. Instead of seeing a long list of employees, users now see a small number of records at a time, which is easier to read and understand. The Next and Previous buttons also make navigation simple and user-friendly, especially when there is a large amount of data.
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
+## How this change affects your understanding, or conceptualization, of the app.
+- From this change, I learned how frontend and backend work together using query parameters like page and limit. I also understood how to manage data more efficiently instead of loading everything at once. This helped me understand the importance of performance and scalability in web applications, and how small changes can make a big difference in user experience.
