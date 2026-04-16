@@ -8,9 +8,10 @@ function Employees() {
   const [page, setPage] = useState(1);
   const { isSignedIn } = useUser();
   const { getToken } = useAuth();
+  const API = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    fetch(`http://localhost:3000/employees?page=${page}&limit=5`)
+    fetch(`${API}/employees?page=${page}&limit=5`)
       .then(res => res.json())
       .then(data => {
         console.log(data); 
@@ -31,7 +32,7 @@ const addEmployee = async (employee: any) => {
       User: 10,
     };
 
-      const res = await fetch("http://localhost:3000/employees", {
+      const res = await fetch(`${API}/employees`, {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${token}`,
@@ -96,7 +97,9 @@ const addEmployee = async (employee: any) => {
       <button onClick={() => setPage(page + 1)}>
         Next
       </button>
+      
     </div>
+    
       
     </div>
   );

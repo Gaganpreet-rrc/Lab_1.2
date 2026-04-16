@@ -3,9 +3,10 @@ import { useState, useEffect } from "react";
 function Organization() {
   const [organization, setOrganization] = useState<any[]>([]);
   const [page, setPage] = useState(1);
+  const API = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    fetch(`http://localhost:3000/organization?page=${page}&limit=5`)
+    fetch(`${API}/organization?page=${page}&limit=5`)
       .then(res => res.json())
       .then(data => setOrganization(data));
   }, [page]);
