@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 function Organization() {
   const [organization, setOrganization] = useState<any[]>([]);
   const [page, setPage] = useState(1);
-  const API = import.meta.env.VITE_API_URL;
+  const API = import.meta.env.VITE_API_BASE_URL;
 
   useEffect(() => {
     fetch(`${API}/organization?page=${page}&limit=5`)

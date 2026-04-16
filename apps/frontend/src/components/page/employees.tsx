@@ -8,7 +8,7 @@ function Employees() {
   const [page, setPage] = useState(1);
   const { isSignedIn } = useUser();
   const { getToken } = useAuth();
-  const API = import.meta.env.VITE_API_URL;
+  const API = import.meta.env.VITE_API_BASE_URL;
 
   useEffect(() => {
     fetch(`${API}/employees?page=${page}&limit=5`)
